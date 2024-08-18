@@ -46,7 +46,7 @@ void draw_title_screen(){
     for(temp1=0;temp1<40;++temp1)
     move_sprite(temp1,0,0);
     move_bkg(0,0);
-    set_bkg_data(37,127,title_data);
+    set_bkg_data(37,136,title_data);
     set_bkg_tiles(0,0,20,1,empty);
     set_bkg_tiles(0,1,20,18,title_map);
     set_win_tiles(0,0,20,1,empty);
