@@ -16,6 +16,8 @@ struct OBJECT {
     UINT8 width;
 };
 #define player_y 0x7D;
+UINT8 sound_use_timer;
+UINT8 sound_timer;
 UINT8 state;
 UINT8 enemy_spwaned;
 UINT8 temp0;
@@ -92,17 +94,41 @@ void main() {
     DISPLAY_ON;
     SPRITES_8x16;
     initGame();
-
     while (1) {
         wait_vbl_done();
+        if(sound_timer>0){
+            sound_timer--;
+        }
         if(state==0){
             waitpad(J_START);
             set_win_tiles(7, 0, 5, 1, ready);
             state=1;
-            temp0=60;
+            temp0=120;
         }
         if(state==1){
+            if(temp0==120){
+                NR21_REG=0x81;
+                NR22_REG=0x84;
+                NR23_REG=0x3A;
+                NR24_REG=0x87;
+            }
+            if(temp0==80){
+                NR21_REG=0x81;
+                NR22_REG=0x84;
+                NR23_REG=0x3A;
+                NR24_REG=0x87;
+            }
+            if(temp0==40){
+                NR21_REG=0x81;
+                NR22_REG=0x84;
+                NR23_REG=0x3A;
+                NR24_REG=0x87;
+            }
             if(temp0==0){
+                NR21_REG=0x81;
+                NR22_REG=0x84;
+                NR23_REG=0x9E;
+                NR24_REG=0x87;
                 set_bkg_data(37, 4, BGs);
                 set_bkg_data(38, 1, BGs[1 + STAR1_INDEX]);
                 set_bkg_data(39, 1, BGs[1 + STAR2_INDEX]);
@@ -119,7 +145,8 @@ void main() {
                 move_sprite(2, PLAYER_X, 0x89);
                 move_sprite(3, PLAYER_X + 8, 0x89);
                 state=2;
-            }else
+            }
+            if(temp0>0)
             temp0--;
         }
         if(state==2){
@@ -129,10 +156,10 @@ void main() {
                 PLAYER_SHOT.y = player_y + 16;
                 PLAYER_SHOT.height = 9;
                 PLAYER_SHOT.width = 8;
-                NR10_REG = 0x7B;
-                NR11_REG = 0xC2;
-                NR12_REG = 0x53;
-                NR13_REG = 0xD6;
+                NR10_REG = 0x4F;
+                NR11_REG = 0x8B;
+                NR12_REG = 0x43;
+                NR13_REG = 0x2A;
                 NR14_REG = 0x86;
             }
             if (joypad() & J_LEFT) {
@@ -231,10 +258,10 @@ void main() {
                     had_Shot=0;
                     ENEMY.y = 200;
                     PLAYER_SHOT.y = 3;
-                    NR41_REG = 0x34;
-                    NR42_REG = 0x93;
-                    NR43_REG = 0x89;
-                    NR44_REG = 0x80;
+                    NR41_REG=0x09;
+                    NR42_REG=0xF1;
+                    NR43_REG=0x79;
+                    NR44_REG=0xC0;
                 }
             }
             if ((ENEMY.x >= PLAYER.x && ENEMY.x <= PLAYER.x + PLAYER.width) &&
@@ -245,10 +272,10 @@ void main() {
                     SCORE[temp0]=0;
                     }
                     state = 3;
-                    NR41_REG = 0x34;
-                    NR42_REG = 0x93;
-                    NR43_REG = 0x89;
-                    NR44_REG = 0x80;
+                    NR41_REG=0x09;
+                    NR42_REG=0xF1;
+                    NR43_REG=0x79;
+                    NR44_REG=0xC0;
                     set_win_tiles(10,0,10,1,gameOver);
             } 
             if(state==3){
