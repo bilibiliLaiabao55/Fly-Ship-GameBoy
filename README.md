@@ -1,2 +1,3 @@
-# Fly-Ship-GameBoy
+# Fly Ship GameBoy
 This is GameBoy GAME! 
+it is classic
