@@ -1,13 +1,11 @@
 #include <gb/gb.h>
 #include <gb/font.h>
-#include <stdio.h>
 #include "sprites.c"
 #include "bgs.c"
 #include "BackGround.c"
 #include "UI.c"
 #include "stars.c"
-#include "title_map.c"
-#include "title_data.c"
+#include "title_picture.c"
 
 struct OBJECT {
     UINT8 x;
@@ -56,7 +54,7 @@ void draw_title_screen(){
 void initGame(){
     PLAYER.y = player_y;
     PLAYER.height = 16;
-    PLAYER.width = 16;
+    PLAYER.width = 6;
     had_Shot=0;
     enemy_spwaned=0;
     ENEMY.x=0;
@@ -101,30 +99,33 @@ void main() {
         }
         if(state==0){
             waitpad(J_START);
-            set_win_tiles(7, 0, 5, 1, ready);
             state=1;
             temp0=120;
         }
         if(state==1){
             if(temp0==120){
+                set_win_tiles(9,0,1,1,t4);
                 NR21_REG=0x81;
                 NR22_REG=0x84;
                 NR23_REG=0x3A;
                 NR24_REG=0x87;
             }
             if(temp0==80){
+                set_win_tiles(9,0,1,1,t3);
                 NR21_REG=0x81;
                 NR22_REG=0x84;
                 NR23_REG=0x3A;
                 NR24_REG=0x87;
             }
             if(temp0==40){
+                set_win_tiles(9,0,1,1,t2);
                 NR21_REG=0x81;
                 NR22_REG=0x84;
                 NR23_REG=0x3A;
                 NR24_REG=0x87;
             }
             if(temp0==0){
+                set_win_tiles(9,0,1,1,t1);
                 NR21_REG=0x81;
                 NR22_REG=0x84;
                 NR23_REG=0x9E;
@@ -135,6 +136,7 @@ void main() {
                 set_bkg_data(40, 1, BGs[1 + STAR3_INDEX]);
                 set_bkg_tiles(0,0,20,20,backGround);
                 set_bkg_tiles(0,20,20,20,backGround);
+                set_win_tiles(0, 0, 20, 1, empty0);
                 set_win_tiles(0, 0, 5, 1, score_tiles);
                 set_sprite_tile(0, 0);
                 set_sprite_tile(1, 2);
@@ -156,11 +158,11 @@ void main() {
                 PLAYER_SHOT.y = player_y + 16;
                 PLAYER_SHOT.height = 9;
                 PLAYER_SHOT.width = 8;
-                NR10_REG = 0x4F;
-                NR11_REG = 0x8B;
-                NR12_REG = 0x43;
-                NR13_REG = 0x2A;
-                NR14_REG = 0x86;
+                NR10_REG = 0x3B;
+                NR11_REG = 0x80;
+                NR12_REG = 0xF2;
+                NR13_REG = 0xB4;
+                NR14_REG = 0x85;
             }
             if (joypad() & J_LEFT) {
                 if (PLAYER_X > 0x08)
@@ -169,6 +171,14 @@ void main() {
             if (joypad() & J_RIGHT) {
                 if (PLAYER_X < 0x98)
                     ++PLAYER_X;
+            }
+            if(joypad() & J_START){
+                state=4;
+                set_win_tiles(12,0,5,1,pause);
+                NR21_REG = 0x85;
+                NR22_REG = 0x84;
+                NR23_REG = 0x96;
+                NR24_REG = 0x85;
             }
             check_score();
             set_score();
@@ -226,7 +236,7 @@ void main() {
                 ENEMY.x = rand_num;
                 ENEMY.y = 0;
                 ENEMY.height = 16;
-                ENEMY.width = 16;
+                ENEMY.width = 6;
             } else {
                 set_sprite_tile(5, 14);
                 set_sprite_tile(6, 16);
@@ -249,33 +259,33 @@ void main() {
                 move_sprite(4, PLAYER_SHOT.x, PLAYER_SHOT.y);
             }
 
-            if ((ENEMY.x >= PLAYER_SHOT.x && ENEMY.x <= PLAYER_SHOT.x + PLAYER_SHOT.width) &&
+            if ((ENEMY.x+3 >= PLAYER_SHOT.x && ENEMY.x+3 <= PLAYER_SHOT.x + PLAYER_SHOT.width) &&
                 (ENEMY.y >= PLAYER_SHOT.y && ENEMY.y <= PLAYER_SHOT.y + PLAYER_SHOT.height) ||
-                (PLAYER_SHOT.x >= ENEMY.x && PLAYER_SHOT.x <= ENEMY.x + ENEMY.width) &&
+                (PLAYER_SHOT.x >= ENEMY.x+3 && PLAYER_SHOT.x <= ENEMY.x+3 + ENEMY.width) &&
                 (PLAYER_SHOT.y >= ENEMY.y && PLAYER_SHOT.y <= ENEMY.y + ENEMY.height)) {
                 if(had_Shot){
                     ++SCORE[3];
                     had_Shot=0;
                     ENEMY.y = 200;
                     PLAYER_SHOT.y = 3;
-                    NR41_REG=0x09;
+                    NR41_REG=0x00;
                     NR42_REG=0xF1;
-                    NR43_REG=0x79;
-                    NR44_REG=0xC0;
+                    NR43_REG=0x89;
+                    NR44_REG=0x80;
                 }
             }
-            if ((ENEMY.x >= PLAYER.x && ENEMY.x <= PLAYER.x + PLAYER.width) &&
+            if ((ENEMY.x+3 >= PLAYER.x+3 && ENEMY.x+3 <= PLAYER.x+3 + PLAYER.width) &&
                 (ENEMY.y >= PLAYER.y && ENEMY.y <= PLAYER.y + PLAYER.height) ||
-                (PLAYER.x >= ENEMY.x && PLAYER.x <= ENEMY.x + ENEMY.width) &&
+                (PLAYER.x+3 >= ENEMY.x+3 && PLAYER.x+3 <= ENEMY.x+3 + ENEMY.width) &&
                 (PLAYER.y >= ENEMY.y && PLAYER.y <= ENEMY.y + ENEMY.height)) {
                     for(temp0=0;temp0<5;++temp0){
                     SCORE[temp0]=0;
                     }
                     state = 3;
-                    NR41_REG=0x09;
+                    NR41_REG=0x00;
                     NR42_REG=0xF1;
-                    NR43_REG=0x79;
-                    NR44_REG=0xC0;
+                    NR43_REG=0x89;
+                    NR44_REG=0x80;
                     set_win_tiles(10,0,10,1,gameOver);
             } 
             if(state==3){
@@ -284,6 +294,17 @@ void main() {
                 draw_title_screen();
                 state=0;
                 initGame();
+            }
+            if(state==4){
+                waitpadup(J_START);
+                waitpad(J_START);
+                waitpadup(J_START);
+                NR21_REG = 0x85;
+                NR22_REG = 0x84;
+                NR23_REG = 0x96;
+                NR24_REG = 0x85;
+                set_win_tiles(12,0,5,1,empty0);
+                state=2;
             }
         }
     }
