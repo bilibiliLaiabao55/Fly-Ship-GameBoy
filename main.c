@@ -1,5 +1,7 @@
 #include <gb/gb.h>
 #include <gb/font.h>
+#include <rand.h>
+#include <time.h>
 #include "sprites.c"
 #include "bgs.c"
 #include "BackGround.c"
@@ -14,8 +16,7 @@ struct OBJECT {
     UINT8 width;
 };
 #define player_y 0x7D;
-UINT8 sound_use_timer;
-UINT8 sound_timer;
+UINT8 rand_num;
 UINT8 state;
 UINT8 enemy_spwaned;
 UINT8 temp0;
@@ -23,7 +24,6 @@ UINT8 temp1;
 UINT8 temp2;
 UINT8 temp3;
 UINT8 temp4;
-UINT8 rand_num = 50;
 UINT8 STAR1_INDEX;
 UINT8 STAR2_INDEX;
 UINT8 STAR3_INDEX;
@@ -51,6 +51,24 @@ void draw_title_screen(){
     set_bkg_tiles(0,1,20,18,title_map);
     set_win_tiles(0,0,20,1,empty);
 }
+void draw_stars(){
+    set_bkg_data(37, 4, BGs);
+    set_bkg_data(38, 1, BGs[1 + STAR1_INDEX]);
+    set_bkg_data(39, 1, BGs[1 + STAR2_INDEX]);
+    set_bkg_data(40, 1, BGs[1 + STAR3_INDEX]);
+    set_bkg_tiles(0,0,20,20,backGround);
+    set_bkg_tiles(0,20,20,20,backGround);
+    set_win_tiles(0, 0, 20, 1, empty0);
+    set_win_tiles(0, 0, 5, 1, score_tiles);
+    set_sprite_tile(0, 0);
+    set_sprite_tile(1, 2);
+    set_sprite_tile(2, 4);
+    set_sprite_tile(3, 6);
+    move_sprite(0, PLAYER_X, 0x7D);
+    move_sprite(1, PLAYER_X + 8, 0x7D);
+    move_sprite(2, PLAYER_X, 0x89);
+    move_sprite(3, PLAYER_X + 8, 0x89);
+}
 void initGame(){
     PLAYER.y = player_y;
     PLAYER.height = 16;
@@ -60,7 +78,6 @@ void initGame(){
     ENEMY.x=0;
     ENEMY.y=0;
 }
-
 void check_score(){
     for(temp0=0;temp0<5;++temp0){
         if(SCORE[temp0]==10){
@@ -80,6 +97,7 @@ void main() {
     font_init();
     font = font_load(font_min);
     font_set(font);
+    initrand(clock());
     move_win(7, 136);
     NR52_REG = 0x80;
     NR50_REG = 0x77;
@@ -94,9 +112,6 @@ void main() {
     initGame();
     while (1) {
         wait_vbl_done();
-        if(sound_timer>0){
-            sound_timer--;
-        }
         if(state==0){
             waitpad(J_START);
             state=1;
@@ -130,22 +145,7 @@ void main() {
                 NR22_REG=0x84;
                 NR23_REG=0x9E;
                 NR24_REG=0x87;
-                set_bkg_data(37, 4, BGs);
-                set_bkg_data(38, 1, BGs[1 + STAR1_INDEX]);
-                set_bkg_data(39, 1, BGs[1 + STAR2_INDEX]);
-                set_bkg_data(40, 1, BGs[1 + STAR3_INDEX]);
-                set_bkg_tiles(0,0,20,20,backGround);
-                set_bkg_tiles(0,20,20,20,backGround);
-                set_win_tiles(0, 0, 20, 1, empty0);
-                set_win_tiles(0, 0, 5, 1, score_tiles);
-                set_sprite_tile(0, 0);
-                set_sprite_tile(1, 2);
-                set_sprite_tile(2, 4);
-                set_sprite_tile(3, 6);
-                move_sprite(0, PLAYER_X, 0x7D);
-                move_sprite(1, PLAYER_X + 8, 0x7D);
-                move_sprite(2, PLAYER_X, 0x89);
-                move_sprite(3, PLAYER_X + 8, 0x89);
+                draw_stars();
                 state=2;
             }
             if(temp0>0)
@@ -183,11 +183,6 @@ void main() {
             check_score();
             set_score();
             scroll_bkg(0, -2);
-            if (rand_num >= 0x96) {
-                rand_num = 0x0A;
-            } else {
-                rand_num += 2;
-            }
             if (FIRE_TIMER == 0) {
                 FIRE_INDEX = (FIRE_INDEX == 0) ? 1 : 0;
                 FIRE_TIMER = 10;
@@ -233,7 +228,16 @@ void main() {
             ++ENEMY.y;
             if (enemy_spwaned == 0) {
                 enemy_spwaned = 1;
-                ENEMY.x = rand_num;
+                for(temp1=0;temp1<10;++temp1){
+                    temp0=rand();
+                    if(temp0<0x08)
+                    continue;
+                    else if(temp0>0x98)
+                    continue;
+                    else
+                    break;
+                }
+                ENEMY.x = temp0;
                 ENEMY.y = 0;
                 ENEMY.height = 16;
                 ENEMY.width = 6;
