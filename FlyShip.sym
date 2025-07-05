@@ -1,298 +1,131 @@
-; no$gmb format .sym file
-; Generated automagically by ASxxxx linker V01.75 (SDK 3.0.0)
-; Area: .  .ABS.
-00:0000 s__HEADER
-00:0000 .init
-00:0000 s__SFR
-00:0200 s__CODE
-00:2018 s__HOME
-00:21C4 s__BASE
-00:3DC8 s__LIT
-00:3DC8 s__GSINIT
-01:44E7 s__GSINITTAIL
-01:44E8 s__GSFINAL
-00:C000 .OAM
-00:C0A0 s__DATA
-00:C1EE s__BSS
-00:C274 s__HEAP
-00:C274 s__BSEG
-00:C274 s__ISEG
-00:C274 s__XSEG
-00:C274 s__OVERLAY
-00:E000 .STACK
-00:FF80 .refresh_OAM
-; Area: _CODE
-00:0200 _draw_title_screen
-00:029C _BGs
-00:02AC _backGround
-00:043C _empty
-00:0474 _empty0
-00:04AC _score_tiles
-00:04B9 _gameOver
-00:04C3 _pause
-00:04C8 _t1
-00:04CA _t2
-00:04CC _t3
-00:04CE _t4
-00:04D0 _star1
-00:04E0 _star2
-00:04F0 _star3
-00:0500 _title_data
-00:0D80 _title_map
-00:0EE8 _draw_stars
-00:1047 _initGame
-00:1070 _check_score
-00:10DF _set_score
-00:113A _main
-00:187C _putchar
-00:1885 _setchar
-00:188E _gotoxy
-00:1899 _posx
-00:18AA _posy
-00:18BB _rand
-00:18BB _randw
-00:18E6 .adv_gcurs
-00:1903 .circle
-00:19A6 .horlin
-00:19DE .verlin
-00:1A3A .circplot
-00:1AB8 .box
-00:1B8E .line
-00:1CAF .xonly
-00:1DFE .yonly
-00:1E1F .plot
-00:1E3C .wrbyte
-00:1EBE .getpix
-00:1EF3 .wrtchr
-00:1F57 _gotogxy
-00:1F62 _wrtchr
-00:1F77 _getpix
-00:1F83 _color
-00:1F92 _circle
-00:1FAC _box
-00:1FD0 _line
-00:1FE8 _plot_point
-00:1FFC _plot
-; Area: _HEADER
-00:01D2 _exit
-; Area: _HOME
-00:2018 .set_mode
-00:2028 .remove_VBL
-00:202E .remove_LCD
-00:2034 .remove_TIM
-00:203A .remove_SIO
-00:2040 .remove_JOY
-00:2046 .add_VBL
-00:204C .add_LCD
-00:2052 .add_TIM
-00:2058 .add_SIO
-00:205E .add_JOY
-00:2064 .remove_int
-00:2084 .add_int
-00:20A0 .wait_vbl_done
-00:20A0 _wait_vbl_done
-00:20B7 _display_off
-00:20B7 .display_off
-00:20D8 .serial_IO
-00:2107 _mode
-00:2110 _get_mode
-00:2115 _enable_interrupts
-00:2117 _disable_interrupts
-00:2119 _reset
-00:2119 .reset
-00:211F _set_interrupts
-00:212A _remove_VBL
-00:2135 _remove_LCD
-00:2140 _remove_TIM
-00:214B _remove_SIO
-00:2156 _remove_JOY
-00:2161 _add_VBL
-00:216C _add_LCD
-00:2177 _add_TIM
-00:2182 _add_SIO
-00:218D _add_JOY
-00:2198 _clock
-00:21A1 __printTStates
-00:21A2 banked_call
-00:21BB banked_ret
-; Area: _BASE
-00:21C4 font_copy_uncompressed
-00:21FA font_copy_compressed
-00:224F font_load
-00:2297 font_copy_current
-00:22DF font_set
-00:22EC .put_char
-00:2305 .out_char
-00:230C .del_char
-00:2367 _font_load
-00:2375 _font_set
-00:2384 _font_init
-00:23A6 _cls
-00:23A6 .cls
-00:23D8 .cr_curs
-00:23ED .adv_curs
-00:2449 .tmode
-00:2472 .tmode_out
-00:2482 _scroll_bkg
-00:2498 _move_win
-00:24A1 _initrand
-00:24A3 .initrand
-00:24AC .padup
-00:24AC _waitpadup
-00:24BC .jpad
-00:24E9 .wait_pad
-00:24F0 _joypad
-00:24F5 _waitpad
-00:24FF .mv_sprite
-00:250E _move_sprite
-00:251B _font_spect
-00:289D _set_win_tiles
-00:28B1 _set_win_data
-00:28B1 _set_bkg_data
-00:28FE _set_sprite_data
-00:292D _font_load_ibm_fixed
-00:2934 _font_ibm_fixed
-00:2A36 _font_ibm_fixed_tiles
-00:3236 .gmode
-00:3298 .vbl
-00:32A3 .lcd
-00:32B0 .draw_image
-00:32BA .switch_data
-00:32F1 _switch_data
-00:330C _draw_image
-00:331F .y_table
-00:343F _move_bkg
-00:3448 _font_italic
-00:37B2 _font_ibm
-00:3B34 .set_sprite_tile
-00:3B41 _set_sprite_tile
-00:3B4C .init_vram
-00:3B5A .init_wtt
-00:3B6A .init_btt
-00:3B78 .init_tt
-00:3B7E _font_min
-00:3D28 .copy_vram
-00:3D37 _get_data
-00:3D37 _set_data
-00:3D4A _set_bkg_tiles
-00:3D5E .set_xy_wtt
-00:3D6F .set_xy_btt
-00:3D7E .set_xy_tt
-00:3DAF _set_tiles
-; Area: _LIT
-; Area: _GSINIT
-00:3DC8 gsinit
-; Area: _GSINITTAIL
-; Area: _GSFINAL
-; Area: _DATA
-00:C0A0 _Sprites
-00:C1C0 _stars
-00:C1C6 _rand_num
-00:C1C7 _state
-00:C1C8 _enemy_spwaned
-00:C1C9 _temp0
-00:C1CA _temp1
-00:C1CB _temp2
-00:C1CC _temp3
-00:C1CD _temp4
-00:C1CE _STAR1_INDEX
-00:C1CF _STAR2_INDEX
-00:C1D0 _STAR3_INDEX
-00:C1D1 _STAR1_TIMER
-00:C1D2 _STAR2_TIMER
-00:C1D3 _STAR3_TIMER
-00:C1D4 _FIRE_INDEX
-00:C1D5 _FIRE_TIMER
-00:C1D6 _PLAYER_X
-00:C1D7 _had_Shot
-00:C1D8 _ENEMY
-00:C1DC _PLAYER_SHOT
-00:C1E0 _PLAYER
-00:C1E4 _SCORE
-00:C1E9 _SCORE_TILE
-; Area: _BSS
-00:C1EE __cpu
-00:C1EF .mode
-00:C1F0 __io_out
-00:C1F1 __io_in
-00:C1F2 __io_status
-00:C1F3 .vbl_done
-00:C1F4 __current_bank
-00:C1F5 _sys_time
-00:C1F5 .sys_time
-00:C1F7 .int_0x40
-00:C207 .int_0x48
-00:C217 .int_0x50
-00:C227 .int_0x58
-00:C237 .int_0x60
-00:C247 font_current
-00:C24A font_first_free_tile
-00:C24B font_table
-00:C25D .curx
-00:C25E .cury
-00:C25F .randhi
-00:C260 .randlo
-00:C261 .fg_colour
-00:C262 .bg_colour
-; Area: _HEAP
-00:C274 _malloc_heap_start
-; Area: _OVERLAY
-; Area: _ISEG
-; Area: _BSEG
-; Area: _XSEG
-; Area: _SFR
-00:FF00 _P1_REG
-00:FF01 _SB_REG
-00:FF02 _SC_REG
-00:FF04 _DIV_REG
-00:FF05 _TIMA_REG
-00:FF06 _TMA_REG
-00:FF07 _TAC_REG
-00:FF0F _IF_REG
-00:FF10 _NR10_REG
-00:FF11 _NR11_REG
-00:FF12 _NR12_REG
-00:FF13 _NR13_REG
-00:FF14 _NR14_REG
-00:FF16 _NR21_REG
-00:FF17 _NR22_REG
-00:FF18 _NR23_REG
-00:FF19 _NR24_REG
-00:FF1A _NR30_REG
-00:FF1B _NR31_REG
-00:FF1C _NR32_REG
-00:FF1D _NR33_REG
-00:FF1E _NR34_REG
-00:FF20 _NR41_REG
-00:FF21 _NR42_REG
-00:FF22 _NR43_REG
-00:FF23 _NR44_REG
-00:FF24 _NR50_REG
-00:FF25 _NR51_REG
-00:FF26 _NR52_REG
-00:FF40 _LCDC_REG
-00:FF41 _STAT_REG
-00:FF42 _SCY_REG
-00:FF43 _SCX_REG
-00:FF44 _LY_REG
-00:FF45 _LYC_REG
-00:FF46 _DMA_REG
-00:FF47 _BGP_REG
-00:FF48 _OBP0_REG
-00:FF49 _OBP1_REG
-00:FF4A _WY_REG
-00:FF4B _WX_REG
-00:FF4D _KEY1_REG
-00:FF4F _VBK_REG
-00:FF51 _HDMA1_REG
-00:FF52 _HDMA2_REG
-00:FF53 _HDMA3_REG
-00:FF54 _HDMA4_REG
-00:FF55 _HDMA5_REG
-00:FF56 _RP_REG
-00:FF68 _BCPS_REG
-00:FF69 _BCPD_REG
-00:FF6A _OCPS_REG
-00:FF6B _OCPD_REG
-00:FF70 _SVBK_REG
-00:FFFF _IE_REG
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+  0 _BGs                                                            0000007C GR
+  1 _ENEMY                                                          00000017 GR
+  1 _FIRE_INDEX                                                     0000000F GR
+  1 _FIRE_TIMER                                                     00000010 GR
+    _LCDC_REG                                                       ******** GX
+    _NR10_REG                                                       ******** GX
+    _NR11_REG                                                       ******** GX
+    _NR12_REG                                                       ******** GX
+    _NR13_REG                                                       ******** GX
+    _NR14_REG                                                       ******** GX
+    _NR21_REG                                                       ******** GX
+    _NR22_REG                                                       ******** GX
+    _NR23_REG                                                       ******** GX
+    _NR24_REG                                                       ******** GX
+    _NR41_REG                                                       ******** GX
+    _NR42_REG                                                       ******** GX
+    _NR43_REG                                                       ******** GX
+    _NR44_REG                                                       ******** GX
+    _NR50_REG                                                       ******** GX
+    _NR51_REG                                                       ******** GX
+    _NR52_REG                                                       ******** GX
+  1 _PLAYER                                                         0000001F GR
+  1 _PLAYER_SHOT                                                    0000001B GR
+  2 _PLAYER_X                                                       00000126 GR
+  2 _SCORE                                                          00000127 GR
+  2 _SCORE_TILE                                                     0000012C GR
+    _SCX_REG                                                        ******** GX
+    _SCY_REG                                                        ******** GX
+  1 _STAR1_INDEX                                                    00000009 GR
+  1 _STAR1_TIMER                                                    0000000C GR
+  1 _STAR2_INDEX                                                    0000000A GR
+  1 _STAR2_TIMER                                                    0000000D GR
+  1 _STAR3_INDEX                                                    0000000B GR
+  1 _STAR3_TIMER                                                    0000000E GR
+  2 _Sprites                                                        00000000 GR
+    _WX_REG                                                         ******** GX
+    _WY_REG                                                         ******** GX
+    __cpu                                                           ******** GX
+  7 __xinit__PLAYER_X                                               00000126 R
+  7 __xinit__SCORE                                                  00000127 R
+  7 __xinit__SCORE_TILE                                             0000012C R
+  7 __xinit__Sprites                                                00000000 R
+  7 __xinit__stars                                                  00000120 R
+  0 _backGround                                                     0000008C GR
+    _cgb_compatibility                                              ******** GX
+  1 _cgb_enable                                                     00000003 GR
+  0 _check_score                                                    00000DF0 GR
+    _clock                                                          ******** GX
+    _cpu_fast                                                       ******** GX
+  0 _draw_stars                                                     00000CD0 GR
+  0 _draw_title_screen                                              00000000 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 2
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 _empty                                                          0000021C GR
+  0 _empty0                                                         00000254 GR
+  1 _enemy_spwaned                                                  00000002 GR
+    _font_init                                                      ******** GX
+    _font_load                                                      ******** GX
+    _font_min                                                       ******** GX
+    _font_set                                                       ******** GX
+  0 _gameOver                                                       00000299 GR
+  1 _had_Shot                                                       00000011 GR
+  0 _initGame                                                       00000DC4 GR
+    _initrand                                                       ******** GX
+    _joypad                                                         ******** GX
+    _joypad_init                                                    ******** GX
+  1 _joypad_t_val                                                   00000012 GR
+  0 _main                                                           00000E4E GR
+  0 _pause                                                          000002A3 GR
+    _rand                                                           ******** GX
+  1 _rand_num                                                       00000000 GR
+  0 _score_tiles                                                    0000028C GR
+    _set_bkg_data                                                   ******** GX
+    _set_bkg_palette                                                ******** GX
+    _set_bkg_tiles                                                  ******** GX
+  0 _set_score                                                      00000E1A GR
+    _set_sprite_data                                                ******** GX
+    _set_sprite_palette                                             ******** GX
+    _set_win_tiles                                                  ******** GX
+    _shadow_OAM                                                     ******** GX
+  0 _sprite0_pal                                                    00000064 GR
+  0 _sprite1_pal                                                    0000006C GR
+  0 _star1                                                          000002B0 GR
+  0 _star2                                                          000002C0 GR
+  0 _star3                                                          000002D0 GR
+  0 _star_pal                                                       00000074 GR
+  2 _stars                                                          00000120 GR
+  1 _state                                                          00000001 GR
+  0 _t1                                                             000002A8 GR
+  0 _t2                                                             000002AA GR
+  0 _t3                                                             000002AC GR
+  0 _t4                                                             000002AE GR
+  1 _temp0                                                          00000004 GR
+  1 _temp1                                                          00000005 GR
+  1 _temp2                                                          00000006 GR
+  1 _temp3                                                          00000007 GR
+  1 _temp4                                                          00000008 GR
+  0 _title_data                                                     000002E8 GR
+  0 _title_map                                                      00000B68 GR
+  0 _title_pal                                                      000002E0 GR
+    _wait_vbl_done                                                  ******** GX
+    _waitpad                                                        ******** GX
+    _waitpadup                                                      ******** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 3
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size     1435   flags    0
+   1 _DATA                                      size       23   flags    0
+   2 _INITIALIZED                               size      131   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size      131   flags    0
+   8 _CABS                                      size        0   flags    8
+
